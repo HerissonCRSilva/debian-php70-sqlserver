@@ -1,4 +1,4 @@
-FROM debian:jessie
+FROM debian
 MAINTAINER Herisson Silva <herisson.cleiton.r@gmail.com>
 RUN \
   apt-get update && \
