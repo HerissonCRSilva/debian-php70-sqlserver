@@ -7,8 +7,8 @@ RUN \
   wget \
   git
 
-RUN echo "deb http://packages.dotdeb.org all" >> /etc/apt/sources.list.d/dotdeb.org.list && \
-    echo "deb-src http://packages.dotdeb.org all" >> /etc/apt/sources.list.d/dotdeb.org.list && \
+RUN echo "deb http://packages.dotdeb.org jessie all" && \
+    echo "deb-src http://packages.dotdeb.org jessie all" && \
     wget -O- http://www.dotdeb.org/dotdeb.gpg | apt-key add -
 
 RUN \
