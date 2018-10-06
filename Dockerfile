@@ -1,4 +1,4 @@
-FROM debian
+FROM debian:jessie
 MAINTAINER Herisson Silva <herisson.cleiton.r@gmail.com>
 RUN \
   apt-get update && \
@@ -7,8 +7,8 @@ RUN \
   wget \
   git
 
-RUN echo "deb http://packages.dotdeb.org jessie all" && \
-    echo "deb-src http://packages.dotdeb.org jessie all" && \
+RUN echo "deb http://packages.dotdeb.org jessie all" >> /etc/apt/sources.list.d/dotdeb.org.list && \
+    echo "deb-src http://packages.dotdeb.org jessie all" >> /etc/apt/sources.list.d/dotdeb.org.list && \
     wget -O- http://www.dotdeb.org/dotdeb.gpg | apt-key add -
 
 RUN \
@@ -84,7 +84,7 @@ nl_NL@euro ISO-8859-15\n'\
 usr/sbin/locale-gen
 
 RUN usermod -u 1000 www-data
-RUN mkdir "/run/php"
+RUN mkdir "/var/run/php"
 
 ENV ENVIRONMENT dev
 ENV PHP_FPM_USER www-data
