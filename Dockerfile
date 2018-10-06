@@ -84,7 +84,6 @@ nl_NL@euro ISO-8859-15\n'\
 usr/sbin/locale-gen
 
 RUN usermod -u 1000 www-data
-RUN mkdir "/var/run/php"
 
 ENV ENVIRONMENT dev
 ENV PHP_FPM_USER www-data
