@@ -108,9 +108,6 @@ ADD  run.sh /run.sh
 
 COPY run.sh /run.sh
 COPY 000-default.conf /etc/apache2/sites-available/000-default.conf
-COPY ZendFramework-1.12.3.tar.gz /etc/zend/ZendFramework-1.12.3.tar.gz
-RUN tar -xvzf /etc/zend/ZendFramework-1.12.3.tar.gz
-RUN rm -rf /etc/zend/ZendFramework-1.12.3.tar.gz
 COPY php.ini /etc/php5/apache2/php.ini
 COPY .bashrc /root/.bashrc
 #RUN source .bashrc
