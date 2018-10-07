@@ -108,7 +108,7 @@ COPY run.sh /run.sh
 ADD  run.sh /run.sh
 
 COPY 000-default.conf /etc/apache2/sites-available/000-default.conf
-COPY php.ini /etc/php5/apache2/php.ini
+COPY php.ini /etc/php/7.0/apache2/php.ini
 COPY .bashrc /root/.bashrc
 #RUN source .bashrc
 COPY run /usr/local/bin/run
