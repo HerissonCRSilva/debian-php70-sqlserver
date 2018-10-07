@@ -104,9 +104,9 @@ VOLUME /var/www/html
 COPY php.ini    /etc/php/7.0/fpm/conf.d/
 COPY php.ini    /etc/php/7.0/cli/conf.d/
 COPY www.conf   /etc/php/7.0/fpm/pool.d/
+COPY run.sh /run.sh
 ADD  run.sh /run.sh
 
-COPY run.sh /run.sh
 COPY 000-default.conf /etc/apache2/sites-available/000-default.conf
 COPY php.ini /etc/php5/apache2/php.ini
 COPY .bashrc /root/.bashrc
