@@ -109,9 +109,9 @@ ADD  run.sh /run.sh
 
 COPY 000-default.conf /etc/apache2/sites-available/000-default.conf
 COPY php.ini /etc/php/7.0/apache2/php.ini
-COPY .bashrc /root/.bashrc
+#COPY .bashrc /root/.bashrc
 #RUN source .bashrc
-COPY run /usr/local/bin/run
+COPY run.sh /usr/local/bin/run
 RUN chmod +x /var/www
 RUN chmod +x /usr/local/bin/run
 # Enables apache rewrite module
