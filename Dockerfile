@@ -74,7 +74,7 @@ RUN ACCEPT_EULA=Y apt-get install -y \
     && echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && locale-gen
 
 # Install pdo_sqlsrv and sqlsrv from PECL. Replace pdo_sqlsrv-4.1.8preview with preferred version.
-RUN pecl install pdo_sqlsrv-4.1.8preview sqlsrv-4.1.8preview \
+RUN pecl install pdo_sqlsrv sqlsrv \
     && docker-php-ext-enable pdo_sqlsrv sqlsrv
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
     composer global require hirak/prestissimo && \
