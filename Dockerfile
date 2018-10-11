@@ -132,7 +132,7 @@ echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bashrc
 
 RUN \
 source ~/.bashrc \
-apt-get install unixodbc-dev \
+#apt-get install unixodbc-dev \
 sed -i 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/g' /etc/locale.gen \
 locale-gen
 
