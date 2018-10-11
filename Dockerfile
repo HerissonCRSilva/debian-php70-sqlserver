@@ -126,17 +126,23 @@ RUN apt-get update
 
 RUN \
 ACCEPT_EULA=Y apt-get install mssql-tools \
-ACCEPT_EULA=Y apt-get install msodbcsql17 \
+ACCEPT_EULA=Y apt-get install msodbcsql17
+
+RUN \
 echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bash_profile \
-echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bashrc \
+echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bashrc
+
+RUN \
 source ~/.bashrc \
 apt-get install unixodbc-dev \
 sed -i 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/g' /etc/locale.gen \
-locale-gen \
+locale-gen
+
+RUN \
 pecl install sqlsrv \
-echo extension=sqlsrv.so >> `php --ini | grep "Scan for additional .ini files" | sed -e "s|.*:\s*||"`/20-sqlsrv.ini \
+echo "extension=sqlsrv.so >> `php --ini | grep "Scan for additional .ini files" | sed -e "s|.*:\s*||"`/20-sqlsrv.ini \
 pecl install pdo_sqlsrv \
-echo extension=pdo_sqlsrv.so >> `php --ini | grep "Scan for additional .ini files" | sed -e "s|.*:\s*||"`/30-pdo_sqlsrv.ini \
+echo "extension=pdo_sqlsrv.so >> `php --ini | grep "Scan for additional .ini files" | sed -e "s|.*:\s*||"`/30-pdo_sqlsrv.ini \
 echo "extension=pdo_sqlsrv.so" >> /etc/php/7.0/apache2/conf.d/30-pdo_sqlsrv.ini \
 echo "extension=sqlsrv.so" >> /etc/php/7.0/apache2/conf.d/20-sqlsrv.ini 
 
