@@ -130,11 +130,11 @@ RUN \
 echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bash_profile \
 echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bashrc
 
-RUN \
-source ~/.bashrc \
+#RUN \
+#source ~/.bashrc \
 #apt-get install unixodbc-dev \
-sed -i 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/g' /etc/locale.gen \
-locale-gen
+#sed -i 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/g' /etc/locale.gen \
+#locale-gen
 
 RUN sudo apt-get install -y unixodbc-dev php7.0-dev \
     && wget -nv "https://github.com/Microsoft/msphpsql/archive/PHP-7.0-Linux.tar.gz" \
