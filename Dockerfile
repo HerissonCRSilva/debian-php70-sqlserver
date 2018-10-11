@@ -124,7 +124,7 @@ RUN curl https://packages.microsoft.com/config/debian/8/prod.list > /etc/apt/sou
 
 RUN apt-get update
 
-RUN apt-get install msodbcsql17 mssql-tools
+#RUN apt-get install msodbcsql17 mssql-tools
 
 RUN \
 echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bash_profile \
