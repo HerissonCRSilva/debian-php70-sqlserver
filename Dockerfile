@@ -136,13 +136,22 @@ apt-get install unixodbc-dev \
 sed -i 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/g' /etc/locale.gen \
 locale-gen
 
-RUN \
-pecl install sqlsrv \
-echo "extension=sqlsrv.so >> `php --ini | grep "Scan for additional .ini files" | sed -e "s|.*:\s*||"`/20-sqlsrv.ini \
-pecl install pdo_sqlsrv \
-echo extension=pdo_sqlsrv.so >> `php --ini | grep "Scan for additional .ini files" | sed -e "s|.*:\s*||"`/30-pdo_sqlsrv.ini \
-echo extension=sqlsrv.so >> `php --ini | grep "Scan for additional .ini files" | sed -e "s|.*:\s*||"`/20-sqlsrv.ini \
-echo "extension=sqlsrv.so" >> /etc/php/7.2/apache2/conf.d/20-sqlsrv.ini
+RUN sudo apt-get install -y unixodbc-dev php7.0-dev \
+    && wget -nv "https://github.com/Microsoft/msphpsql/archive/PHP-7.0-Linux.tar.gz" \
+    && tar -xf PHP-7.0-Linux.tar.gz \
+    && cd msphpsql-PHP-7.0-Linux/source/ \
+    && cp -r shared/ pdo_sqlsrv/ \
+    && cd pdo_sqlsrv/ \
+    && phpize \
+    && ./configure CXXFLAGS=-std=c++11 \
+    && make \
+    && sudo make "INSTALL=$(pwd)/build/shtool install -c --mode=0644" install \
+    && printf "; priority=20\nextension=pdo_sqlsrv.so" \
+    | sudo tee /etc/php/7.0/mods-available/pdo_sqlsrv.ini \
+    && sudo phpenmod pdo_sqlsrv \
+    && php --rextinfo pdo_sqlsrv \
+    && sudo phpdismod pdo_sqlsrv \
+    && sudo rm -f /usr/lib/php/20151012/pdo_sqlsrv.so
 
 #SSL
 #RUN /usr/sbin/a2ensite default-ssl
