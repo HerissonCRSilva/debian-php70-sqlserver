@@ -49,6 +49,9 @@ RUN \
   php7.0-zip \
   php7.0-bcmath \
   php7.0-soap \
+  libapache2-mod-php7.0 \
+  php-pear \
+  apt-transport-https \
   nano \
 
     # Cleaning...
@@ -116,6 +119,26 @@ RUN chmod +x /var/www
 RUN chmod +x /usr/local/bin/run
 # Enables apache rewrite module
 RUN a2enmod rewrite
+
+RUN curl https://packages.microsoft.com/config/debian/8/prod.list > /etc/apt/sources.list.d/mssql-release.list
+
+RUN apt-get update
+
+RUN \
+ACCEPT_EULA=Y apt-get install mssql-tools \
+ACCEPT_EULA=Y apt-get install msodbcsql17 \
+echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bash_profile \
+echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bashrc \
+source ~/.bashrc \
+apt-get install unixodbc-dev \
+sed -i 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/g' /etc/locale.gen \
+locale-gen \
+pecl install sqlsrv \
+echo extension=sqlsrv.so >> `php --ini | grep "Scan for additional .ini files" | sed -e "s|.*:\s*||"`/20-sqlsrv.ini \
+pecl install pdo_sqlsrv \
+echo extension=pdo_sqlsrv.so >> `php --ini | grep "Scan for additional .ini files" | sed -e "s|.*:\s*||"`/30-pdo_sqlsrv.ini \
+echo "extension=pdo_sqlsrv.so" >> /etc/php/7.0/apache2/conf.d/30-pdo_sqlsrv.ini \
+echo "extension=sqlsrv.so" >> /etc/php/7.0/apache2/conf.d/20-sqlsrv.ini 
 
 #SSL
 #RUN /usr/sbin/a2ensite default-ssl
