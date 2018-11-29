@@ -172,7 +172,7 @@ RUN apt-get install libapache2-mod-php
 
 RUN a2dismod mpm_event
 RUN a2dismod mpm_prefork
-RUN a2dismod php7
+RUN a2dismod php7.0
 RUN echo "extension=pdo_sqlsrv.so" >> /etc/php/7.0/apache2/conf.d/30-pdo_sqlsrv.ini
 RUN echo "extension=sqlsrv.so" >> /etc/php/7.0/apache2/conf.d/20-sqlsrv.ini
 
