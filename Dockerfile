@@ -148,8 +148,8 @@ RUN \
 echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bash_profile \
 echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bashrc
 
-RUN echo extension=pdo_sqlsrv.so >> `php --ini | grep "Scan for additional .ini files" | sed -e "s|.*:\s*||"`/30-pdo_sqlsrv.ini
-RUN echo extension=sqlsrv.so >> `php --ini | grep "Scan for additional .ini files" | sed -e "s|.*:\s*||"`/20-sqlsrv.ini
+#RUN echo extension=pdo_sqlsrv.so >> `php --ini | grep "Scan for additional .ini files" | sed -e "s|.*:\s*||"`/30-pdo_sqlsrv.ini
+#RUN echo extension=sqlsrv.so >> `php --ini | grep "Scan for additional .ini files" | sed -e "s|.*:\s*||"`/20-sqlsrv.ini
 
 RUN apt-get install libapache2-mod-php
 
