@@ -148,17 +148,6 @@ RUN \
 echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bash_profile \
 echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bashrc
 
-#RUN echo extension=pdo_sqlsrv.so >> `php --ini | grep "Scan for additional .ini files" | sed -e "s|.*:\s*||"`/30-pdo_sqlsrv.ini
-#RUN echo extension=sqlsrv.so >> `php --ini | grep "Scan for additional .ini files" | sed -e "s|.*:\s*||"`/20-sqlsrv.ini
-
-RUN apt-get install libapache2-mod-php
-
-RUN a2dismod mpm_event
-RUN a2dismod mpm_prefork
-RUN a2dismod php7.0
-RUN echo "extension=pdo_sqlsrv.so" >> /etc/php/7.0/apache2/conf.d/30-pdo_sqlsrv.ini
-RUN echo "extension=sqlsrv.so" >> /etc/php/7.0/apache2/conf.d/20-sqlsrv.ini
-
 #RUN \
 #source ~/.bashrc \
 #apt-get install unixodbc-dev \
@@ -175,6 +164,8 @@ LABEL Description=" Apache 2.4.7 Webserver - PHP 7.0.3"
 EXPOSE 80
 
 ENTRYPOINT ["/bin/bash", "/run.sh"]
+
+
 #SSL
 #EXPOSE 443
 
